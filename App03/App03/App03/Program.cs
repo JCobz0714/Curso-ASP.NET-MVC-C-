@@ -33,6 +33,7 @@ int resultado = f(250, "Es Jacobo Osorio");
 public delegate int MiDelegado(int i, string s);
 */
 
+/*
 static void func1(int arg1, int arg2)
 {
     string resultado = (arg1 + arg2).ToString();
@@ -79,3 +80,46 @@ f1f2(arg1, arg2);
 
 //Delegates compuestos
 public delegate void MiDelegado(int arg1, int arg2);
+*/
+
+//EVENTOS
+
+using App03;
+
+var obj = new EventPublisher();
+/* Cuando se ejecute el evento de valueChanged que es simplemente cambiar el valor de
+una variable, se va a realizar ese cambio del valor de la variable y se va a ejecutar
+tambien la logica del metodo "obj_valueChanged" que lo que hace es simplemente
+imprimir un mensaje */
+obj.valueChanged += new MiEventoHandler(obj_valueChanged);
+
+//Tambien se puede escribir el delegate de la siguiente forma (con un delegate anonimo)
+//obj.valueChanged += delegate (string value)
+//{
+//    Console.WriteLine($"El valor de la propiedad cambio a {value}");
+//};
+
+//Este metodo captura el evento, mas especificamente capturando el valor de la
+//propiedad que cambio
+void obj_valueChanged(string value)
+{
+    Console.WriteLine($"El valor de la propiedad cambio a {value}");
+}
+
+string str;
+
+do
+{
+    Console.WriteLine("Ingrese un valor: ");
+    str = Console.ReadLine();
+
+    if (!str.Equals("salir"))
+    {
+        obj.val = str;
+    }
+} while(!str.Equals("salir"));
+
+Console.WriteLine("Culmino el programa porque escribio 'salir'");
+
+//Para trabajar con eventos, hay que declarar un delegate
+public delegate void MiEventoHandler(string value);
