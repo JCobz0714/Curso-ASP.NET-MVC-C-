@@ -82,28 +82,38 @@ f1f2(arg1, arg2);
 public delegate void MiDelegado(int arg1, int arg2);
 */
 
-//EVENTOS
+//EVENTOS Y EVENTOS ENCADENADOS
 
 using App03;
+
+//Los eventos se ejecutan de manera secuencial, la secuencia depende de la
+//implementacion del metodo (el orden de implementacion)
 
 var obj = new EventPublisher();
 /* Cuando se ejecute el evento de valueChanged que es simplemente cambiar el valor de
 una variable, se va a realizar ese cambio del valor de la variable y se va a ejecutar
 tambien la logica del metodo "obj_valueChanged" que lo que hace es simplemente
 imprimir un mensaje */
-obj.valueChanged += new MiEventoHandler(obj_valueChanged);
+obj.valueChanged += new MiEventoHandler(obj_valueChanged1);
 
 //Tambien se puede escribir el delegate de la siguiente forma (con un delegate anonimo)
-//obj.valueChanged += delegate (string value)
-//{
-//    Console.WriteLine($"El valor de la propiedad cambio a {value}");
-//};
+obj.valueChanged += delegate (string value)
+{
+    Console.WriteLine($"Se esta disparando el evento handler 1 {value}");
+};
 
 //Este metodo captura el evento, mas especificamente capturando el valor de la
 //propiedad que cambio
-void obj_valueChanged(string value)
+void obj_valueChanged1(string value)
 {
-    Console.WriteLine($"El valor de la propiedad cambio a {value}");
+    Console.WriteLine($"Se esta disparando el evento handler 2 {value}");
+}
+
+obj.valueChanged += new MiEventoHandler(obj_valueChanged2);
+
+void obj_valueChanged2(string value)
+{
+    Console.WriteLine($"Se esta disparando el evento handler 3 {value}");
 }
 
 string str;
