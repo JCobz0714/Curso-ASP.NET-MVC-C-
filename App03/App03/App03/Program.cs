@@ -84,16 +84,17 @@ public delegate void MiDelegado(int arg1, int arg2);
 
 //EVENTOS Y EVENTOS ENCADENADOS
 
-using App03;
+//using App03;
 
 //Los eventos se ejecutan de manera secuencial, la secuencia depende de la
 //implementacion del metodo (el orden de implementacion)
 
-var obj = new EventPublisher();
+//var obj = new EventPublisher();
 /* Cuando se ejecute el evento de valueChanged que es simplemente cambiar el valor de
 una variable, se va a realizar ese cambio del valor de la variable y se va a ejecutar
 tambien la logica del metodo "obj_valueChanged" que lo que hace es simplemente
 imprimir un mensaje */
+/*
 obj.valueChanged += new MiEventoHandler(obj_valueChanged1);
 
 //Tambien se puede escribir el delegate de la siguiente forma (con un delegate anonimo)
@@ -142,3 +143,38 @@ obj miEvento += delegate(object sender, MiEventoArgs e){
     //esta imprimiendo
     Console.WriteLine($"{sender.GetType()} la propiedad valor que cambio es {e.data}");
 };
+*/
+
+/*
+FUNCIONES LAMBDA
+
+Las funciones lambda son otra manera de implementar delegates anonimos o
+funciones anonimas.
+
+Las funciones lambda es basicamente la logica de un metodo que se pueda
+escribir en menos de dos lineas
+
+Las funciones lambda son funciones anonimas que se pueden asignar a variables.
+*/
+
+//Recibir un numero, y ese numero se va a multiplicar por si mismo
+//Primero recibe los parametros, despues la logica
+MiDelegado d1 = (x) => x * x;
+Console.WriteLine($"El resultado es {d1(5)}");
+
+d1 = (x) => x * 10;
+Console.WriteLine($"El resultado de multiplicar por 10 es {d1(7)}");
+
+MiDelegado2 d2 = (x, s) => {
+    Console.WriteLine($"Imprimiendo el valor de {x}");
+    Console.WriteLine($"Imprimiendo el valor de {s}");
+};
+
+//Devolver true si el numero es mayor que 10
+BooleanoDelegado d3 = (x) => x > 10;
+Console.WriteLine($"El resultado si el numero es mayor que 10 {d3(11)}");
+Console.WriteLine($"El resultado si el numero es menor que 10 {d3(7)}");
+
+public delegate int MiDelegado(int x);
+public delegate void MiDelegado2(int x, string s);
+public delegate bool BooleanoDelegado(int x);
