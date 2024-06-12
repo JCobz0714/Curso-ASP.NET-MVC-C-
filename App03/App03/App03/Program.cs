@@ -133,3 +133,12 @@ Console.WriteLine("Culmino el programa porque escribio 'salir'");
 
 //Para trabajar con eventos, hay que declarar un delegate
 public delegate void MiEventoHandler(string value);
+
+//.NET INCLUYE UNA CLASE DE TIPO EVENTHANDLER QUE SE USA COMO TEMPLATE PARA EJECUTAR LOS EVENTOS
+//El sender representa el origen de donde se esta disparando el evento
+obj miEvento += delegate(object sender, MiEventoArgs e){
+    //El GetType me permite saber el nombre de la clase de la cual proviene
+    // el objeto, el "e.data" me permite ver el valor del evento que se
+    //esta imprimiendo
+    Console.WriteLine($"{sender.GetType()} la propiedad valor que cambio es {e.data}");
+};

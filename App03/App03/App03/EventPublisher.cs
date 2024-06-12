@@ -14,12 +14,15 @@ namespace App03
         // anteriormente
         public event MiEventoHandler valueChanged;
 
+        public event EventHandler<MiEventoArgs> miEvento;
+
         public string val
         {
             set
             {
                 this.theVal = value;
                 this.valueChanged(theVal);
+                this.miEvento(this, new MiEventoArgs {data = theVal});
             }
         }
     }
