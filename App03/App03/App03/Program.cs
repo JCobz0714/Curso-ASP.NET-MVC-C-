@@ -157,6 +157,7 @@ escribir en menos de dos lineas
 Las funciones lambda son funciones anonimas que se pueden asignar a variables.
 */
 
+/*
 //Recibir un numero, y ese numero se va a multiplicar por si mismo
 //Primero recibe los parametros, despues la logica
 MiDelegado d1 = (x) => x * x;
@@ -178,3 +179,26 @@ Console.WriteLine($"El resultado si el numero es menor que 10 {d3(7)}");
 public delegate int MiDelegado(int x);
 public delegate void MiDelegado2(int x, string s);
 public delegate bool BooleanoDelegado(int x);
+*/
+
+//EVENTOS Y METODOS EN LAMBDA
+//Lambdas para encapsular los disparos de los eventos
+var miClaseLambda = new MiClaseLambda();
+//Definir la funcion de tipo anonima pero con una funcion lambda
+miClaseLambda.valueChanged += (x) =>{
+    Console.WriteLine($"El valor de la propiedad cambio {x}");
+};
+
+string str;
+
+do{
+    str = Console.ReadLine();
+
+    if(str.Equals("salir")){
+        miClaseLambda.Val = str;
+    }
+} while(!str.Equals("salir"));
+
+Console.WriteLine("Gracias por seguirnos");
+        
+public delegate void MiEventoHandler(string value);
