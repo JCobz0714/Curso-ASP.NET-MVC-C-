@@ -1,6 +1,5 @@
-﻿/*
-using App03;
-
+﻿using App03;
+/*
 var objeto = new ClassFuncion();
 
 MiDelegate f = objeto.func1;
@@ -183,6 +182,7 @@ public delegate bool BooleanoDelegado(int x);
 
 //EVENTOS Y METODOS EN LAMBDA
 //Lambdas para encapsular los disparos de los eventos
+
 var miClaseLambda = new MiClaseLambda();
 //Definir la funcion de tipo anonima pero con una funcion lambda
 miClaseLambda.valueChanged += (x) =>{
