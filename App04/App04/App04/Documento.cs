@@ -1,6 +1,8 @@
 ﻿namespace App04
 {
-    public class Documento : IOperaciones
+    //Para heredar de multiples interfaces, se agregan precedidos por una
+    //coma
+    public class Documento : IOperaciones, IMensajeria
     {
         private string nombre;
 
@@ -24,6 +26,18 @@
         public bool NecesitaGuardar()
         {
             return false;
+        }
+
+        public void EnviarEmail(){
+            Console.WriteLine("Enviar correo electronico por gmail");
+        }
+
+        public void EnviarMensajeTexto(){
+            Console.WriteLine("Enviar mensaje de texto por iphone");
+        }
+
+        public void EnviarNotification(){
+            Console.WriteLine("Enviar Notification por login");
         }
     }
 }

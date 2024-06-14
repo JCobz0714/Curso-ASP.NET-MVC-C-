@@ -52,3 +52,13 @@ IOperaciones ioperaciones = documento as IOperaciones;
 if(ioperaciones is not null){
   ioperaciones.Cargar();
 }
+
+//AGREGANDO VARIAS INTERFACES A UNA SOLA SUBCLASE O CLASE HIJO
+documento.EnviarNotification();
+documento.EnviarMensajeTexto();
+documento.EnviarEmail();
+
+//Cualquier clase puede ser transformada o casteada a conveniencia para el
+//codigo o proyecto que se este construyendo.
+IMensajeria imensajeria = documento as IMensajeria;
+imensajeria.EnviarMensajeTexto();
