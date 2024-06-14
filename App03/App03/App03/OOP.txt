@@ -1,0 +1,161 @@
+TEORIA DE PROGRAMACION ORIENTADA A OBJETOS
+
+Al principio de la clase se definen las propiedades que caracterizan al
+objeto. Estas propiedades se declaran con un underscore ("_") al inicio
+del nombre de este para diferenciarlos de una variable normal o parametro 
+con el mismo nombre.
+
+PRACTICAS DE CODIGO EN C#
+
+Ejemplo:
+
+public class Libro{
+  string _nombre;
+  string _autor;
+  int _cantidadPaginas;
+}
+
+Todas las clases deben tener un constructor definidos con el mismo nombre
+de la clase, los parametros que recibe el constructor deben tener el mismo
+nombre de las propiedades que se definieron al inicio de la clase.
+
+Ejemplo:
+
+public Libro(string nombre, string autor, int cantidadPaginas){
+  _nombre = nombre;
+  _autor = autor;
+  _cantidadPaginas = cantidadPaginas;
+}
+
+INSTANCIAR UN OBJETO:
+la estructura es: Nombre de la clase, nombre que va a tener el objeto, palabra
+reservada "new", nombre de la clase con sus parentesis (dentro de esos
+parentesis se escriben los parametros, si los necesita)
+
+EJEMPLO:
+
+Libro donQuijote = new Libro("nombre", "autor", nroPaginas);
+
+------------------------------------------------------------------------------
+
+ACCESSORS EN CLASES
+
+Public: Se puede acceder desde cualquier codigo dentro del programa.
+Protected: Se puede acceder solo por metodos de la misma clase o subclase
+(Herencia).
+Private: Se puede acceder solo por metodos de la misma clase (No incluye
+herencia).
+
+Ejemplo:
+
+Estas variables declaradas al principio de la clase, por defecto seran
+privadas.
+
+public class Libro{
+  private string _nombre;
+  private string _autor;
+  private int _cantidadPaginas;
+}
+
+GETTERS AND SETTERS
+
+Primera forma de declarar un get:
+
+public string GetNombre(){
+  return _nombre;
+}
+
+Primera forma de declarar un set:
+
+public void SetNombre(string nombreLibro){
+  _nombre = nombreLibro;
+}
+
+CON LAS SIGUIENTES FORMAS, SI SE QUIEREN UTILIZAR DENTRO DE LA MISMA CLASE
+DONDE SE ESTAN DECLARANDO ESTAS VARIABLES, CON SIMPLEMENTE ESCRIBIR EL NOMBRE
+DE LA VARIABLE YA .NET SE ENCARGA DE SABER SI ES UN GET O UN SET.
+
+Segunda forma de declarar un get y un set:
+//Las propiedades se declaran con la primera letra en mayuscula
+
+private string _nombre;
+
+public string Nombre{
+  get{
+    return _nombre;
+  }
+  set{ //No es necesario definir parametros para este tipo de propiedades
+    //Ese parametro que ingreso el usuario equivale a la palabra "value"
+    _nombre = value;
+  }
+}
+
+
+Tercera forma de declarar un get y un set:
+
+private string _autor;
+
+public string Autor{
+  get => _autor;
+  set => _autor = value;
+}
+
+
+Cuarta forma de declarar un get y un set;
+
+private int _cantidadPaginas;
+
+public int CantidadPaginas{ get; set; }
+
+
+Como utilizar estas formas de declaraciones de los getters y setters (Funciona
+con todos los metodos):
+Libro donQuijote = new Libro("nombre", "autor", nroPaginas);
+
+GET:
+donQuijote.Nombre = "ksdnjsndjfs";
+donQuijote.Autor = "djnsjdnjsd";
+donQuijote.cantidadPaginas = 328523;
+
+SET:
+//Imprimiendo el valor del nombre del libro
+Console.WriteLine(donQuijote.Nombre);
+Console.WriteLine(donQuijote.Autor);
+Console.WriteLine(donQuijote.CantidadPaginas);
+
+-----------------------------------------------------------------------------
+
+HERENCIA
+Ayudan a reutilizar las clases creando subclases
+
+Como indicar que una clase esta heredando de una clase padre:
+EJEMPLO:
+
+public class Libro : Publicacion{
+}
+
+LLAMANDO AL CONSTRUCTOR DE LA CLASE PADRE EN LA CLASE HIJO
+//En la base() se mandan los parametros que pide el constructor de la clase
+//padre
+public Libro (stirng nombre, string autor, int cantidadPaginas, decimal precio) : base(nombre, precio, cantidadPaginas){
+  //Las propiedades que no esten en el constructor de la clase padre, hay
+  // que settearlos
+  Autor = autor;
+}
+
+POLIMORFISMO DE METODOS
+Como usar el polimorfismo en .NET
+Ejemplo:
+//La palabra "virtual" denota que este metodo se puede sobreescribir por las
+//subclases que hereden de la clase padre
+public virtual string GetDescription() => $"{Nombre} precio {Precio}";
+
+//Para aplicar el polimorfismo de los metodos en las subclases en .NET,
+// se utiliza la palabra "override" para denotar que ese metodo esta
+//sobreescribiendo el metodo de la clase padre
+public override string GetDescripcion() => $"{Nombre} escrito por {Autor}, paginas {NumeroPaginas}";
+
+COMO LLAMAR LAS INSTANCIAS DE LAS CLASES EN HERENCIA
+Se ejecutan de forma como se ejecutaria una clase normal sin herencia, pero
+pasando los parametros que la subclase necesite, no los parametros que
+necesita la clase padre
