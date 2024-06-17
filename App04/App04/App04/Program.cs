@@ -62,3 +62,15 @@ documento.EnviarEmail();
 //codigo o proyecto que se este construyendo.
 IMensajeria imensajeria = documento as IMensajeria;
 imensajeria.EnviarMensajeTexto();
+
+//Para la interface INotifyPropertyChanged, segun la documentacion de
+//microsoft, el delegate debe contener un "object sender" (que representa
+//el objeto origen, donde se esta disparando el evento), el
+//"PropertyChangedEventArgs e" (que representa el evento). En ningun
+// momento se esta cambiando ni actualizando el objeto "Documento".
+documento.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)){
+  Console.WriteLine($"La propiedad del documento que cambio es {e.PropertyName}");
+}
+
+//En el momento que se le agrega este string  a la propiedad "DocumentoNombre", se va a disparar el evento. Cuando el evento se dispara, se va a ejecutar el codigo que se encuentra en el delegate.
+documento.DocumentoNombre = "Quijote de la mancha";

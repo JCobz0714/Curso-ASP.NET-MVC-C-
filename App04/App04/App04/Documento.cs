@@ -2,13 +2,25 @@
 {
     //Para heredar de multiples interfaces, se agregan precedidos por una
     //coma
-    public class Documento : IOperaciones, IMensajeria
+    public class Documento : IOperaciones, IMensajeria, INotifyPropertyChanged
     {
         private string nombre;
-
+        
+        public string DocumentoNombre(){
+            get {return nombre};
+            set{nombre = value;
+            Notify NotifyPropChanged("DocumentoNombre")}
+        }
+        
         public Documento(string s)
         {
             nombre = s;
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void NotifyPropChanged(string propName){
+            PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
         //Hay que implementar los metodos de la interfaz para que no me genere ningun
