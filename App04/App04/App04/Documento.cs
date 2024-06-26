@@ -9,7 +9,7 @@
         public string DocumentoNombre(){
             get {return nombre};
             set{nombre = value;
-            Notify NotifyPropChanged("DocumentoNombre")}
+            NotifyPropChanged("DocumentoNombre")}
         }
         
         public Documento(string s)

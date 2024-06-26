@@ -1,5 +1,35 @@
 ﻿using App04;
 
+/*
+CLASE ABSTRACTA VS INTERFAZ
+
+Clase abstracta: Una subclase solamente se puede extender o heredar a una
+clase abstracta, no a varias.
+
+Interfaz: Una subclase puede implementar multiples interfaces.
+
+------------------------------------------------------------------------------
+
+Clase abstracta: Se pueden crear tanto metodos abstractos (vacios o 
+modificables dentro de las subclases) y metodos
+concretos (con logica implementada, o espeficamente para esa clase padre).
+
+Interfaz: Solamente se pueden crear metodos abstractos.
+
+------------------------------------------------------------------------------
+
+Clase abstracta: Una clase abstracta puede tener propiedades public, 
+protected o private.
+
+Interfaz: No se permite implementar metodos modificadores (public, protected
+o public).
+
+-----------------------------------------------------------------------------
+
+En terminos de rendimiento, se ejecuta mas rapido una implementacion con una
+interfaz que con una clase abstracta.
+*/
+
 var documento = new Documento("Jacobo Osorio");
 
 //Llamando los metodos de la subclase documento, que hereda de la interfaz o clase

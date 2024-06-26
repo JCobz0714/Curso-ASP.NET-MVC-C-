@@ -4,7 +4,7 @@
     //la clase hijo
     public interface IOperaciones
     {
-        //Declarando los metodos SIN la implementacion
+        //Declarando los metodos SIN la implementacion (abstractos)
         void Guardar();
         void Cargar();
         bool NecesitaGuardar();
