@@ -1,12 +1,12 @@
 ﻿namespace App05
 {
     //Quiero que la interfaz IComparable trabaje con datos de tipo "Autor"
-    public class Autor : IComparable<Autor>
+    public class Autor : Persona, IComparable<Autor>
     {
 
-        public string? Nombre { get; set; }
+        //public string? Nombre { get; set; }
 
-        public string? Apellido { get; set; }
+        //public string? Apellido { get; set; }
 
         public Autor(string? nombre, string? apellido)
         {

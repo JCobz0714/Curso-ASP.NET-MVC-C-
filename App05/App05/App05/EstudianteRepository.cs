@@ -1,7 +1,7 @@
 ﻿namespace App05
 {
     //Cargando los datos que se van a utilizar en la clase "Estudiante"
-    public class EstudianteRepository : IRepository<Estudiante>
+    public class EstudianteRepository : IPersonaRepository<Estudiante>
     {
         //Declarando un arreglo que represente los nombres de los estudiantes.
         /*
@@ -27,6 +27,29 @@
             _nombres[9] = new ("Ramiro", "Lopez");
         }
 
+        public IEnumerable<Estudiante> Buscar(string nombre)
+        {
+            /*
+            El metodo Where pertenece a la coleccion de Link. Link es una herramienta
+            que permite hacer busquedas dentro de colecciones de datos.
+
+            Este return lo que hace es devolverme la busqueda de un determinado
+            estudiante pasandole como parametro el nombre. 
+            */
+            return List().Where(estudiante => estudiante.Nombre!.Contains(nombre)
+            || estudiante.Apellido!.Contains(nombre));
+        }
+
+        public Estudiante Crear(NombreCompleto nombre)
+        {
+            return new Estudiante(nombre.nombre, nombre.apellido);
+        }
+
+        public Estudiante CrearPorDefecto()
+        {
+            return new Estudiante();
+        }
+
         //Trabajar con un tipo IEnumerable porque es mas dinamico que un array
         public IEnumerable<Estudiante> List()
         {
@@ -42,6 +65,13 @@
                 yield return new Estudiante(_nombres[index].nombre, _nombres[index].apellido);
                 index++;
             }
+        }
+
+        public IEnumerable<Estudiante> OrdenarList()
+        {
+            var estudiantes = List().ToList();
+            estudiantes.Sort();
+            return estudiantes;
         }
     }
 }

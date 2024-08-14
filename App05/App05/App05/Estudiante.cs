@@ -1,15 +1,25 @@
 ﻿namespace App05
 {
-    public class Estudiante : IComparable<Estudiante>
+    public class Estudiante : Persona, IComparable<Estudiante>
     {
-        //Propiedades que a futuro van a aceptar nulls
-        public string? Nombre { get; set; }
+        /*
+        Setteando valores por defecto cuando la clase no reciba parametros
 
-        public string? Apellido { get; set; }
+        Con la expresion "this()", lo que se hace es llamar automaticamente a otro
+        constructor que esta en la misma clase. De esta forma, el constructor que no
+        recibe parametros va a llamar al constructor que si recibe parametros y le va
+        a settear dos valores por defecto.
+        */
+        public Estudiante() : this("NombrePorDefecto", "ApellidoPorDefecto"){ }
+
+        //Propiedades que a futuro van a aceptar nulls
+        //public string? Nombre { get; set; }
+
+        //public string? Apellido { get; set; }
 
         //Las variables estaticas nunca se resetean, siempre mantienen su valor
         //en el tiempo de ejecucion del programa
-        public static int estudianteCount = 0;
+        //public static int estudianteCount = 0;
 
         public Estudiante(string? nombre, string? apellido)
         {
@@ -18,7 +28,7 @@
 
             //Cada vez que se genere un nuevo objeto de estudiante, la variable
             //estudianteCount se incremente en 1
-            estudianteCount++;
+            //estudianteCount++;
         }
 
         //Heredando de la clase "object", cogemos este metodo ToString()

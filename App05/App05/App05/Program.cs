@@ -55,7 +55,7 @@ para poder utilizar el metodo para imprimir los datos que se encuentran en dicho
 var estudianteService = new EstudiantePrinterService(new EstudianteRepository());
 estudianteService.PrintEstudiantes(5);
 
-Console.WriteLine($"Total de estudiantes: {Estudiante.estudianteCount}");
+//Console.WriteLine($"Total de estudiantes: {Estudiante.estudianteCount}");
 
 //var autorService = new AutorPrinterService(new AutorRepository());
 //autorService.PrintAutores();

@@ -21,9 +21,9 @@
         Con esto, suponemos que la interfaz "IEstudianteRepository", es la que se encarga de entregar o de
         cargar la data que se necesita para poder imprimir la data de "Estudiante"
          */
-        private readonly IRepository<Estudiante> _estudianteRepository;
+        private readonly IPersonaRepository<Estudiante> _estudianteRepository;
 
-        public EstudiantePrinterService(IRepository<Estudiante> estudianteRepository)
+        public EstudiantePrinterService(IPersonaRepository<Estudiante> estudianteRepository)
         {
             _estudianteRepository = estudianteRepository;
         }
@@ -40,7 +40,7 @@
             sale de la pre-existente, lo cual sobrecarga la memoria y hace
             al programa mucho mas pesado
             */
-            var estudiantes = _estudianteRepository.List().Take(max);//.ToArray();
+            //var estudiantes = _estudianteRepository.List().Take(max);//.ToArray();
 
             //Si no se utilizara este "Array.Sort", no es necesario convertir
             //a un array, se puede dejar como un "IEnumerable", y se puede
@@ -61,14 +61,31 @@
             //Console.WriteLine(estudiantes[i]);
             //}
 
+            //Devolver la lista ordenada de estudiantes gracias al metodo OrdenarList
+            var estudiantes = _estudianteRepository.OrdenarList().Take(max).ToArray();
+
             //Llamando el metodo para imprimir la lista IEnumerable de estudiantes
             PrintEstudiantesConsola(estudiantes);
+
+            var estudiantesBuscados = _estudianteRepository.Buscar("Drez");
+
+            PrintEstudiantesBuscados(estudiantesBuscados);
         }
 
         //Para imprimir la lista de tipo IEnumerable de estudiantes
         private void PrintEstudiantesConsola(IEnumerable<Estudiante> estudiantes)
         {
             Console.WriteLine("Estudiantes: ");
+
+            foreach (var estudiante in estudiantes)
+            {
+                Console.WriteLine(estudiante);
+            }
+        }
+
+        private void PrintEstudiantesBuscados(IEnumerable<Estudiante> estudiantes)
+        {
+            Console.WriteLine("Estudiantes buscados: ");
 
             foreach (var estudiante in estudiantes)
             {
