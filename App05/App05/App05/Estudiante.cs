@@ -1,6 +1,6 @@
 ﻿namespace App05
 {
-    public class Estudiante : IComparable
+    public class Estudiante : IComparable<Estudiante>
     {
         //Propiedades que a futuro van a aceptar nulls
         public string? Nombre { get; set; }
@@ -21,27 +21,25 @@
             return $"{Nombre} {Apellido}";
         }
 
-        public int CompareTo(object? obj)
+        public int CompareTo(Estudiante? miEstudiante)
         {
-            if (obj is null) return 1;
-
             //Si obj es de tipo estudiante, entonces quiero que lo instancie o que haga una representacion de
             //este objeto tipo Estudiante
-            //Primero se verifica si el objeto es de tipo Estudiante, si lo es
+            //Primero se verifica si el objeto es de tipo Estudiante. Si lo es,
             //se instancia un objeto tipo estudiante llamado "miEstudiante" con
             //los valores que tiene el parametro "obj"
-            if (obj is Estudiante miEstudiante)
+
+            //Si se repiten apellidos, hacer la comparacion por el nombre
+            if (miEstudiante?.Apellido == this.Apellido)
             {
-                //Si se repiten apellidos, hacer la comparacion por el nombre
-                if (miEstudiante.Apellido == this.Apellido)
-                {
-                    return this.Nombre!.CompareTo(miEstudiante.Nombre);
-                }
-                //Si los apellidos no son iguales, comparar y organizar por apellido
-                return this.Apellido!.CompareTo(miEstudiante.Apellido);
+                return this.Nombre!.CompareTo(miEstudiante?.Nombre);
             }
+
+            //Si los apellidos no son iguales, comparar y organizar por apellido
+            return this.Apellido!.CompareTo(miEstudiante?.Apellido);
+
             //Mostrar una excepcion si el objeto no es de tipo "Estudiante"
-            throw new ArgumentException("No es un objeto de tipo Estudiante", nameof(obj));
+            //throw new ArgumentException("No es un objeto de tipo Estudiante", nameof(miEstudiante));
         }
     }
 }
