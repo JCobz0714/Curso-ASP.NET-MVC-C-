@@ -3,22 +3,45 @@
     //Cargando los datos que se van a utilizar en la clase "Estudiante"
     public class EstudianteRepository : IRepository<Estudiante>
     {
-        public Estudiante[] List()
+        //Declarando un arreglo que represente los nombres de los estudiantes.
+        /*
+        Se crea un tipo de dato llamado "NombreCompleto". Dentro de la clase
+        EstudianteRepository, creamos una variable/objeto/coleccion de 10
+        elementos de nombres, y se esta cargando la data en el constructor
+        de la clase
+        */
+        private NombreCompleto[] _nombres = new NombreCompleto[10];
+
+        public EstudianteRepository()
         {
-            var estudiantes = new Estudiante[10];
+            //Como es de tipo "record", no necesito definir el tipo
+            _nombres[0] = new ("Vaxi", "Drez");
+            _nombres[1] = new ("Maria", "Lopez");
+            _nombres[2] = new ("Nestor", "Arcila");
+            _nombres[3] = new ("Joaquin", "Camino");
+            _nombres[4] = new ("Roberto", "Dulanto");
+            _nombres[5] = new ("Juan", "Garcia");
+            _nombres[6] = new ("Luisa", "Ramirez");
+            _nombres[7] = new ("Luis", "Ojeda");
+            _nombres[8] = new ("Angela", "Arias");
+            _nombres[9] = new ("Ramiro", "Lopez");
+        }
 
-            estudiantes[0] = new Estudiante("Vaxi", "Drez");
-            estudiantes[1] = new Estudiante("Maria", "Lopez");
-            estudiantes[2] = new Estudiante("Nestor", "Arcila");
-            estudiantes[3] = new Estudiante("Joaquin", "Camino");
-            estudiantes[4] = new Estudiante("Roberto", "Dulanto");
-            estudiantes[5] = new Estudiante("Juan", "Garcia");
-            estudiantes[6] = new Estudiante("Luisa", "Ramirez");
-            estudiantes[7] = new Estudiante("Luis", "Ojeda");
-            estudiantes[8] = new Estudiante("Angela", "Arias");
-            estudiantes[9] = new Estudiante("Ramiro", "Lopez");
+        //Trabajar con un tipo IEnumerable porque es mas dinamico que un array
+        public IEnumerable<Estudiante> List()
+        {
+            int index = 0;
 
-            return estudiantes;
+            while(index < _nombres.Length)
+            {
+                /*
+                Lo que hace el "yield" en este caso es agregar el elemento
+                generado de "Estudiante" al interior de la coleccion
+                "IEnumerable<Estudiante>" dinamicamente
+                */
+                yield return new Estudiante(_nombres[index].nombre, _nombres[index].apellido);
+                index++;
+            }
         }
     }
 }

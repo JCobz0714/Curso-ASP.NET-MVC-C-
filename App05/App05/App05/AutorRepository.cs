@@ -2,7 +2,7 @@
 {
     public class AutorRepository : IRepository<Autor>
     {
-        public Autor[] List()
+        public IEnumerable<Autor> List()
         {
             var autores = new Autor[10];
 

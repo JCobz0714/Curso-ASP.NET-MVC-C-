@@ -7,10 +7,18 @@
 
         public string? Apellido { get; set; }
 
+        //Las variables estaticas nunca se resetean, siempre mantienen su valor
+        //en el tiempo de ejecucion del programa
+        public static int estudianteCount = 0;
+
         public Estudiante(string? nombre, string? apellido)
         {
             Nombre = nombre;
             Apellido = apellido;
+
+            //Cada vez que se genere un nuevo objeto de estudiante, la variable
+            //estudianteCount se incremente en 1
+            estudianteCount++;
         }
 
         //Heredando de la clase "object", cogemos este metodo ToString()
@@ -42,4 +50,8 @@
             //throw new ArgumentException("No es un objeto de tipo Estudiante", nameof(miEstudiante));
         }
     }
+
+    //Los record son muy similares a las clases, cumplen el mismo objetivo que es
+    //el almacenamiento de data
+    public record NombreCompleto(string nombre, string apellido);
 }

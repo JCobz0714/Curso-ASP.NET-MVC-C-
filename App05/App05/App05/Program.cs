@@ -53,7 +53,9 @@ Se cargan los datos que estan en el repositorio "EstudianteRepository" a la clas
 para poder utilizar el metodo para imprimir los datos que se encuentran en dicho repositorio
 */
 var estudianteService = new EstudiantePrinterService(new EstudianteRepository());
-estudianteService.PrintEstudiantes();
+estudianteService.PrintEstudiantes(5);
 
-var autorService = new AutorPrinterService(new AutorRepository());
-autorService.PrintAutores();
+Console.WriteLine($"Total de estudiantes: {Estudiante.estudianteCount}");
+
+//var autorService = new AutorPrinterService(new AutorRepository());
+//autorService.PrintAutores();

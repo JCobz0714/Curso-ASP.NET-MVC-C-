@@ -28,16 +28,51 @@
             _estudianteRepository = estudianteRepository;
         }
 
-        public void PrintEstudiantes()
+        //Si no recibe ningun parametro, la variable "max" va a valer 100
+        public void PrintEstudiantes(int max = 100)
         {
-            var estudiantes = _estudianteRepository.List();
-            Array.Sort(estudiantes);
+            /*
+            El metodo "Take" indica cuantos elementos se van a tomar para
+            crear la coleccion. Entonces, lo que se hace aqui es crear la
+            coleccion del tamaño que se le indique o se le envie al metodo
 
-            Console.WriteLine("Imprimiendo lista de Estudiantes desde el metodo PrintEstudiantes: ");
+            Cuando se utiliza un ToArray(), se crea una coleccion nueva que
+            sale de la pre-existente, lo cual sobrecarga la memoria y hace
+            al programa mucho mas pesado
+            */
+            var estudiantes = _estudianteRepository.List().Take(max);//.ToArray();
 
-            for (int i = 0; i < estudiantes.Length; i++)
+            //Si no se utilizara este "Array.Sort", no es necesario convertir
+            //a un array, se puede dejar como un "IEnumerable", y se puede
+            //hacer la impresion de los elementos
+            //Array.Sort(estudiantes);
+
+            //Console.WriteLine("Imprimiendo lista de Estudiantes desde el metodo PrintEstudiantes: ");
+
+            //Mientras que i sea menor a la longitud del array y menor que el
+            //valor del parametro
+            //for (int i = 0; i < estudiantes.Length && i < max; i++)
+            //{
+            //Console.WriteLine(estudiantes[i]);
+            //}
+
+            //for (int i = 0; i < estudiantes.Length; i++)
+            //{
+            //Console.WriteLine(estudiantes[i]);
+            //}
+
+            //Llamando el metodo para imprimir la lista IEnumerable de estudiantes
+            PrintEstudiantesConsola(estudiantes);
+        }
+
+        //Para imprimir la lista de tipo IEnumerable de estudiantes
+        private void PrintEstudiantesConsola(IEnumerable<Estudiante> estudiantes)
+        {
+            Console.WriteLine("Estudiantes: ");
+
+            foreach (var estudiante in estudiantes)
             {
-                Console.WriteLine(estudiantes[i]);
+                Console.WriteLine(estudiante);
             }
         }
     }

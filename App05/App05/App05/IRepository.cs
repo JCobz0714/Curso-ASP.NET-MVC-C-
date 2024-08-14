@@ -10,6 +10,6 @@
     public interface IRepository<T>
     {
         //La "T" representa a una clase o interfaz generico
-        T[] List();
+        IEnumerable<T> List();
     }
 }

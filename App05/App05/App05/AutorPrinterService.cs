@@ -11,7 +11,9 @@
 
         public void PrintAutores()
         {
-            var autores = _autorRepository.List();
+            //Convertir la variable a tipo array para que el Array.Sort lo
+            //reconozca
+            var autores = _autorRepository.List().ToArray();
             Array.Sort(autores);
 
             Console.WriteLine("Imprimiendo lista de Autores desde el metodo PrintAutores: ");
