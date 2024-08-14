@@ -2,9 +2,9 @@
 {
     public class AutorPrinterService
     {
-        private readonly IRepository<Estudiante> _autorRepository;
+        private readonly IRepository<Autor> _autorRepository;
 
-        public AutorPrinterService(IRepository<Estudiante> autorRepository)
+        public AutorPrinterService(IRepository<Autor> autorRepository)
         {
             _autorRepository = autorRepository;
         }
