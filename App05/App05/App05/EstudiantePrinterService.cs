@@ -21,9 +21,9 @@
         Con esto, suponemos que la interfaz "IEstudianteRepository", es la que se encarga de entregar o de
         cargar la data que se necesita para poder imprimir la data de "Estudiante"
          */
-        private readonly IEstudianteRepository _estudianteRepository;
+        private readonly IRepository<Estudiante> _estudianteRepository;
 
-        public EstudiantePrinterService(IEstudianteRepository estudianteRepository)
+        public EstudiantePrinterService(IRepository<Estudiante> estudianteRepository)
         {
             _estudianteRepository = estudianteRepository;
         }

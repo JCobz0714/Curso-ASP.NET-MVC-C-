@@ -1,7 +1,7 @@
 ﻿namespace App05
 {
     //Cargando los datos que se van a utilizar en la clase "Estudiante"
-    public class EstudianteRepository : IEstudianteRepository
+    public class EstudianteRepository : IRepository<Estudiante>
     {
         public Estudiante[] List()
         {
