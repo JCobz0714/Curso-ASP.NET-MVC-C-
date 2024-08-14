@@ -38,7 +38,7 @@
         public int CompareTo(Autor? miAutor)
         {
             //Con esto, evitamos hacer varios casteos o cambios de tipo de dato innecesarios
-            return this.ToString().CompareTo(miAutor.ToString());
+            return this.ToString().CompareTo(miAutor?.ToString());
         }
     }
 }

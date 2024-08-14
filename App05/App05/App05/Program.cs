@@ -1,4 +1,6 @@
-﻿using App05;
+﻿//TODO LO COMENTADO FUE BORRADO EN EL CURSO
+
+/*using App05;
 
 var estudiantes = new Estudiante[10];
 
@@ -42,3 +44,16 @@ for(int i = 0; i < autores.Length; i++)
 {
     Console.WriteLine(autores[i]);
 }
+*/
+
+using App05;
+
+/*
+Se cargan los datos que estan en el repositorio "EstudianteRepository" a la clase "EstudiantePrinterService"
+para poder utilizar el metodo para imprimir los datos que se encuentran en dicho repositorio
+*/
+var estudianteService = new EstudiantePrinterService(new EstudianteRepository());
+estudianteService.PrintEstudiantes();
+
+var autorService = new AutorPrinterService(new AutorRepository());
+autorService.PrintAutores();
