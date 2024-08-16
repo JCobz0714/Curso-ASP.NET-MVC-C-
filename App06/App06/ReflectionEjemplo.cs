@@ -82,29 +82,76 @@ namespace App06
             //El .Pad sirve para tabular un texto, puede ser ya sea a la izquierda(left) o derecha(right) y
             //el parametro que se envia es la cantidad de espacios que se desea tabular
             Console.WriteLine("Type Nombre" .PadRight(20) + "|" + "IsGenericType" .PadRight(20)
-                + "|" + "IsGenericDefinition" .PadRight(20));
+                + "|" + "IsGenericDefinition" .PadRight(20) + "|" + "Generic Arguments");
 
             foreach (var type in types)
             {
                 string output = type.Name.PadRight(20) + "|";
                 output += type.IsGenericType.ToString().PadRight(20) + "|";
-                output += type.IsGenericTypeDefinition;
+                output += type.IsGenericTypeDefinition + "|";
+                output += type.GetGenericArguments().Count();
 
-                ListGenericMethods(type);
+                //ListGenericMethods(type);
 
                 Console.WriteLine(output);
+
+                ListParameterDetails(type);
             }
+        }
+
+        private static void ListParameterDetails(Type type)
+        {
+            var parameters = type.GetGenericArguments();
+            foreach (var parameter in parameters)
+            {
+                if (parameter.IsGenericParameter)
+                {
+                    DisplayGenericParameter(parameter);
+                }
+                else
+                {
+                    DisplayTypeArgument(parameter);
+                }
+            }
+        }
+
+        private static void DisplayGenericParameter(Type parameter)
+        {
+            var constraints = parameter.GetGenericParameterConstraints();
+            Console.WriteLine($"Type parameter position: {parameter.GenericParameterPosition}   " +
+                $"nombre: {parameter.Name}   " +
+                $"constraints: {constraints.Length}   " +
+                $"attributeMask: {parameter.GenericParameterAttributes}");
+
+            if (constraints.Any())
+            {
+                Console.WriteLine("   Nombre   |   Interface?   |   Class?   | Enum?   ");
+
+                foreach (var constraint in constraints)
+                {
+                    Console.WriteLine("   " + constraint.Name.PadRight(16) + "|" +
+                        constraint.IsInterface.ToString().PadRight(11) + "|" +
+                        constraint.IsClass.ToString().PadRight(7) + "|" +
+                        constraint.IsEnum.ToString().PadRight(6));
+                }
+            }
+        }
+
+        private static void DisplayTypeArgument(Type parameter)
+        {
+            Console.WriteLine($"Type argument: {parameter.Name}");
         }
 
         public static void execute()
         {
             var types = new List<Type>
             {
-                typeof(IProcessor<>),
-                typeof(IProcessor<Cliente>),
-                typeof(Processor<>),
-                typeof(Processor<Cliente>),
-                typeof(ClienteProcessor)
+                //typeof(IProcessor<>),
+                //typeof(IProcessor<Cliente>),
+                //typeof(Processor<>),
+                //typeof(Processor<Cliente>),
+                //typeof(ClienteProcessor)
+                typeof(IPipeline<,>)
             };
 
             ListTypeDetails(types);
