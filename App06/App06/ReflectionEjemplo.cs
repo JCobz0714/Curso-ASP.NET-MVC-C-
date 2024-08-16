@@ -6,7 +6,7 @@ namespace App06
     {
         private static void ListGenericMethods(Type type)
         {
-            var metodos = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            var metodos = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).Where(m => m.DeclaringType!.Name != "Object");
             Console.WriteLine($"Metodos son del tipo {type.Name}");
             Console.WriteLine("Nombre     |IsGeneric      |IsGenericDef      |ContainsGenParam");
             int colWidth = 12;
@@ -21,6 +21,57 @@ namespace App06
                 Console.Write(method.IsGenericMethodDefinition.ToString().PadRight(colWidth));
                 Console.Write("|");
                 Console.WriteLine(method.ContainsGenericParameters.ToString().PadRight(colWidth));
+
+                //EJECUTANDO METODOS GENERICOS
+                if (method.IsGenericMethod)
+                {
+                    Console.WriteLine("Ejecutando un metodo generico...");
+
+                    //Obteniendo los parametros
+                    var parametros = method.GetGenericArguments();
+
+                    foreach(var parametro in parametros)
+                    {
+                        if (parametro.IsGenericParameter)
+                        {
+                            Console.WriteLine($"Parametro generico: {parametro.GenericParameterPosition} {parametro.Name}");
+                        }
+                    }
+                    /*
+                    Ejecucion del metodo
+                    
+                    MethodInfo es una clase propia del SDK.NET
+
+                    Con esta expresion, se le indica que encapsule o guarde al metodo generico, y entre
+                    parentesis le indico que la implementacion de este genericMethod se basa en la clase
+                    concreta "Cliente"
+                    */
+                    MethodInfo genericMethod = method.MakeGenericMethod(typeof(Cliente));
+
+                    /*
+                    El primer parametro que exige el Invoke es la instancia de la clase, pero
+                    como el metodo generico es de tipo estatico, no es necesario instanciarlo
+                    para poder utilizarlo dentro del invoke.
+
+                    Para que el invoke se ejecute, hay que pasarle un parametro. En este caso,
+                    como se le indico que el parametro tiene que ser de tipo "Cliente", hay
+                    que pasarle un objeto que sea de tipo "Cliente".
+                    */
+                    object? instancia = null;
+
+                    if (!genericMethod.IsStatic) 
+                    {
+                        /*
+                        Instancia va a ser del tipo que el metodo reciba como parametro.
+
+                        El activator permite crear instancias de objetos pasandole como
+                        parametro el tipo de valor generico.
+                        */
+                        instancia = Activator.CreateInstance(type)!;
+                    }
+
+                    genericMethod.Invoke(instancia, new[] { new Cliente("Vaxi", "Drez") });
+                }
             }
 
             Console.WriteLine();
