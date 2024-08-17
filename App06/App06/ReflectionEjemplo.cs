@@ -156,6 +156,20 @@ namespace App06
 
             ListTypeDetails(types);
 
+            //Arreglo que representan los argumentos "Request" y "Response"
+            Type[] typeArguments = {typeof(Request), typeof(Response)};
+
+            var specificType = typeof(Pipeline<,>).MakeGenericType(typeArguments);
+
+            //Instanciando el objeto
+            var crearInstancia = Activator.CreateInstance(specificType);
+
+            //El metodo "GetType" me devuelve la referencia de la clase sobre la
+            //cual se esta creando el objeto "crearInstancia"
+            ListTypeDetails(new List<Type> {crearInstancia!.GetType()});
+
+            ((dynamic)crearInstancia).EjecutarTarea(new Request());
+
             /*
             ----------------- ESTO FUE BORRADO EN EL VIDEO DE LA CLASE -----------------
 
